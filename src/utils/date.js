@@ -12,11 +12,13 @@ export const formatDate = e => {
 
 export const formatModifiedDate = dateString => {
     const modifiedDate = new Date(dateString);
+    const year = String(modifiedDate.getFullYear());
     const month = String(modifiedDate.getMonth() + 1).padStart(2, 0);
     const date = modifiedDate.getDate().toString().padStart(2, 0);
     const hour = modifiedDate.getHours().toString();
     const minutes = modifiedDate.getMinutes().toString();
-    const formattedDate = `${month}/${date} ${hour}:${minutes}`;
+    const seconds = modifiedDate.getSeconds().toString();
+    const formattedDate = `${year}-${month}-${date} ${hour}:${minutes}:${seconds}`;
 
     return formattedDate;
 };
