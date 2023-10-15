@@ -1,15 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, {StrictMode} from 'react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
+import ModalsProvider from './components/modal/ModalsProvider';
+import ReactDOM from 'react-dom';
+import ReactModal from "react-modal";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+ReactModal.setAppElement('#root');
+
+const rootElement = document.getElementById('root');
+ReactDOM.render(
+    <StrictMode>
+        <ModalsProvider>
+            <App/>
+        </ModalsProvider>
+    </StrictMode>,
+    rootElement,
 );
 
 // If you want to start measuring performance in your app, pass a function
