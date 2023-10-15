@@ -38,7 +38,7 @@ export default function Notice() {
           </thead>
           <tbody>
             {notices.length > 0 && (
-              notices.map(notice => (<NoticeItem notice={notice} />))
+              notices.map(notice => (<NoticeItem key={notice.noticeId} notice={notice} />))
             )}
 
           </tbody>

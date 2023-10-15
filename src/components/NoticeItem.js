@@ -7,7 +7,7 @@ const NoticeItem = ({ notice, onDelete }) => {
     const navigate = useNavigate();
 
     const onCLickEvent = () => {
-        navigate(`/notice/${notice.noticeId}`, { state: { notice: notice } });
+        navigate(`/notice/${notice.noticeId}`, { state: notice });
     };
 
     return (
