@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { formatModifiedDate } from '../utils/date';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const NoticeItem = ({ notice, onDelete }) => {
             <th onClick={onCLickEvent}>{notice.noticeTitle}</th>
             <th>{formatModifiedDate(notice.noticeDate)}</th>
             <th>
-                <Button>삭제</Button>
+                <Button onClick={() => onDelete(notice.noticeId)}>삭제</Button>
             </th>
         </tr>
     );

@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Notice.css';
 import { Button, Container, Form } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Modal from './UI/CustomModal'
+import { noticeApis } from './apis/notice';
 
 export default function NoticeDetail() {
     const location = useLocation();
     const notice = location.state;
+    const { noticeTitle, noticeContent } = notice;
+    const navigate = useNavigate();
 
-    console.log(notice)
-    console.log(notice.noticeId)
-
-    const [contents, setContents] = useState('');
-    const [title, setTitle] = useState('');
+    const [contents, setContents] = useState(noticeContent);
+    const [title, setTitle] = useState(noticeTitle);
+    const [modalContents, setModalContents] = useState('정말 수정하시겠습니까?');
 
     const handleTitleChange = e => {
         setTitle(e.target.value);
@@ -27,6 +28,19 @@ export default function NoticeDetail() {
     const handleShow = e => {
         e.preventDefault();
         setModalShow(true)
+    };
+
+    const handleSubmit = async e => {
+        if (title == "") { setTitle(noticeTitle) }
+        if (contents == "") { console.log('왜' + noticeContent); setContents(noticeContent); console.log('여긴 안옴' + contents); }
+        if (title !== notice.noticeTitle || contents !== notice.noticeContent) {
+            const param = { id: notice.noticeId, title: title, contents: contents };
+            console.log(param)
+            await noticeApis.updateNotice(param);
+            navigate(`/notice`);
+        } else {
+            setModalContents("바뀐 값이 없습니다.")
+        }
     };
 
     return (
@@ -47,11 +61,11 @@ export default function NoticeDetail() {
             <Modal
                 show={modalShow}
                 title="경고"
-                contents='정말 수정하시겠습니까?'
+                contents={modalContents}
                 yes='수정'
                 no='돌아가기'
                 onNo={() => setModalShow(false)}
-                onYes={() => setModalShow(false)} />
+                onYes={handleSubmit} />
         </Container>
     );
 }
