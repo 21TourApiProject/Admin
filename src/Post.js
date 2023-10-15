@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Post.css';
-import {Button, Container, Table} from 'react-bootstrap';
+import {Button, Container, Modal, Table} from 'react-bootstrap';
 import InputBox from './UI/InputBox';
 import {postApis} from "./apis/post";
 import PostItem from "./components/PosItem";
@@ -75,7 +75,6 @@ export default function Post() {
                     )}
                     </tbody>
                 </Table>
-
             </Container>
         </Container>
     );
