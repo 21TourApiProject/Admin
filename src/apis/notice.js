@@ -16,6 +16,17 @@ export const noticeApis = {
         }
     },
 
+    createNotice: async noticeParams => {
+        if (noticeParams !== null) {
+            try {
+                const response = await http.post('/notice/', noticeParams);
+                return response;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    },
+
     deleteNotice: async id => {
         try {
             const response = await http.delete(`/notice/${id}`);

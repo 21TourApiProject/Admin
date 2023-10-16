@@ -1,6 +1,5 @@
 import React from 'react';
 import './Login.css';
-import InputBox from './UI/InputBox';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 

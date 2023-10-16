@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Notice.css';
-import { Container, Table } from 'react-bootstrap';
+import { Container, Table, Button } from 'react-bootstrap';
 import InputBox from './UI/InputBox';
 import { noticeApis } from './apis/notice';
+import { Link } from 'react-router-dom';
 import NoticeItem from './components/NoticeItem';
 import Modal from './UI/CustomModal'
 
@@ -42,8 +43,8 @@ export default function Notice() {
   };
 
   return (
-    <Container className="p-5 justify-content-center">
-      <InputBox />
+    <Container className="p-5 justify-content-center ">
+      <InputBox className="md-3" />
       <Container className="justify-content-center">
         <Table striped bordered hover>
           <thead>
@@ -61,6 +62,7 @@ export default function Notice() {
 
           </tbody>
         </Table>
+        <Link to="/notice/write"><Button>새 공지 등록</Button></Link>
       </Container>
 
       <Modal

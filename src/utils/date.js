@@ -23,3 +23,15 @@ export const formatModifiedDate = dateString => {
     return formattedDate;
 };
 
+export const getNow = e => {
+    const now = new Date();
+    const year = String(now.getFullYear())
+    const month = String(now.getMonth() + 1).padStart(2, 0);
+    const date = String(now.getDate()).padStart(2, 0);
+    const hours = now.getHours(); //현재 시간
+    const minutes = now.getMinutes(); //현재 분
+    const second = now.getSeconds();
+    const today = `${year}-${month}-${date} ${hours}:${minutes}:${second}`;
+
+    return today;
+};
