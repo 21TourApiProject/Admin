@@ -6,6 +6,7 @@ import Login from './Login';
 import Post from './Post';
 import Notice from './Notice';
 import NoticeDetail from './NoticeDetail';
+import NoticeWrite from './NoticeWrite';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path={'/post'} element={<Post />}></Route>
           <Route path={'/notice'} element={<Notice />}></Route>
           <Route path={'/notice/:no'} element={<NoticeDetail />}></Route>
+          <Route path={'/notice/write'} element={<NoticeWrite />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import './Notice.css';
-import { Button, Col, Row, Container, Link, Card, Table } from 'react-bootstrap';
+import { Container, Table, Button } from 'react-bootstrap';
 import InputBox from './UI/InputBox';
 import { noticeApis } from './apis/notice';
+import { Link } from 'react-router-dom';
 import NoticeItem from './components/NoticeItem';
+import Modal from './UI/CustomModal'
 
 export default function Notice() {
 
   const [notices, setNotices] = useState([]);
+  const [modalContents, setModalContents] = useState("");
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     fetchNotices();
   }, []);
+
+  const onclickRemove = id => {
+    setModalContents(id + "번 공지를 삭제하시겠습니까?");
+    setModalShow(true);
+  };
+
+  const removeNotice = async id => {
+    try {
+      setModalShow(false);
+      await noticeApis.deleteNotice(id);
+      fetchNotices();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const fetchNotices = async () => {
     try {
@@ -24,8 +43,8 @@ export default function Notice() {
   };
 
   return (
-    <Container className="p-5 justify-content-center">
-      <InputBox />
+    <Container className="p-5 justify-content-center ">
+      <InputBox className="md-3" />
       <Container className="justify-content-center">
         <Table striped bordered hover>
           <thead>
@@ -38,13 +57,22 @@ export default function Notice() {
           </thead>
           <tbody>
             {notices.length > 0 && (
-              notices.map(notice => (<NoticeItem key={notice.noticeId} notice={notice} />))
+              notices.map(notice => (<NoticeItem key={notice.noticeId} notice={notice} onDelete={onclickRemove} />))
             )}
 
           </tbody>
         </Table>
-
+        <Link to="/notice/write"><Button>새 공지 등록</Button></Link>
       </Container>
+
+      <Modal
+        show={modalShow}
+        title="경고"
+        contents={modalContents}
+        yes='삭제'
+        no='돌아가기'
+        onNo={() => setModalShow(false)}
+        onYes={removeNotice} />
     </Container>
   );
 }
